@@ -1,0 +1,17 @@
+[
+    {
+        "_id": 156,
+        "name": "John",
+        "hobbies": ["Gaming", "Reading"]
+    },
+    {
+        "_id": 32,
+        "name": "Pam",
+        "hobbies": ["Sleeping"]
+    },
+    {
+        "_id": 89,
+        "name": "Elle",
+        "hobbies": ["Playing", "Texting", "Gaming", "Writing"]
+    }
+]

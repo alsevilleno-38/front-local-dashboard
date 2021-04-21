@@ -1,0 +1,10 @@
+.info {
+    color: green;
+}
+.box {
+    border: 2px solid blue;
+    margin-bottom: 0.5rem;
+}
+.alert {
+    font-weight: bold;
+}
