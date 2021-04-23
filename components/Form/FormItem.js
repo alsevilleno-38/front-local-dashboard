@@ -9,25 +9,47 @@ const test = () => {
 }
 
 const FormItem = () => {
+    // console.log("[FormItem]");
     const [id, setId] = useState("");
-    const [user, setUser] = useState({});
-    const [initialReload, setInitialReload] = useState(true);
-    const searchName = async (e) => {        
+    // const [user, setUser] = useState({});
+    // const [initialReload, setInitialReload] = useState(true);
+    const [userData, setUserData] = useState({
+        isGet: false,
+        data: {}
+    })
+    
+    const searchName = async (e) => {    
+        // console.log("[searchName]");
+        let data;
         e.preventDefault();
-        console.log(id);
+        // console.log(id);
         const response = await axios.get(`/api/users/${id}`);
-        console.log(response.data);
+        // console.log(response.data);
+        // console.log("responding");
         if (response.data) {
-            setUser(response.data);            
+            // console.log("before [setUser]");
+            // setUser(response.data);           
+            data = response.data
+            // console.log("[setUser]"); 
         }
         else {
-            setUser(null);
+            data = null;
+            // console.log("before [setUser]");
+            // setUser(null);
+            // console.log("[setUser]"); 
         }
-        setInitialReload(false);
+        setUserData({
+            isGet: true,
+            data: data
+        })
+        // console.log("before [setInitialReload]");
+        // setInitialReload(false);
+        // console.log("[setInitialReload]"); 
     }
     const changeId = (e) => {
         setId(e.target.value);
     }
+    // console.log("render");
     return (
         <Fragment>
             <form onSubmit={searchName}>
@@ -41,7 +63,7 @@ const FormItem = () => {
             </form>
             <div>
                 <p><strong>Details</strong></p>
-                {initialReload ? <p>Name: {user.name}</p> : null}
+                {userData.isGet ?  <p>{userData.data ? `Name: ${userData.data.name}` : "No user matches"}</p>: null}
             </div>
         </Fragment>
     )
