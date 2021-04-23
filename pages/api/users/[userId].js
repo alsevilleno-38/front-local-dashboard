@@ -1,8 +1,18 @@
 import path from "path";
 import fs from "fs";
 
+const sendWithLatency = (cb, latency=1000) => {
+    if (latency == 0) {
+        cb();
+    }
+    else {
+        setTimeout(() => {
+            cb();
+        }, latency)
+    }
+}
 
-export default (req, res, next) => {            
+export default (req, res, next) => {   
     const id = req.query.userId;    
     if (req.method == "GET") {
         fs.readFile(
@@ -11,18 +21,24 @@ export default (req, res, next) => {
             (err, data) => {
                 if (err) {
                     const errorMsg = `Something is wrong!\nDetails: ${err.message}`;
-                    res.status(510).send(errorMsg);
+                    sendWithLatency(() => {
+                        res.status(510).send(errorMsg);
+                    })
                 }
 
                 else {
                     const dataObj = JSON.parse(data);
                     const dataCount = dataObj.length;
                     res.setHeader("content-type", "application/json");
-                    if (id < dataCount) {                        
-                        res.status(230).json(dataObj[id]);
+                    if (id < dataCount) {
+                        sendWithLatency(() => {
+                            res.status(230).json(dataObj[id]);
+                        })
                     }
                     else {
-                        res.status(231).json(null);
+                        sendWithLatency(() => {
+                            res.status(231).json(null);
+                        })
                     }
                 }
             }
