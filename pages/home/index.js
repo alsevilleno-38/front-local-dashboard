@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 import AlertButton from "../../components/Alert/AlertButton";
 import FormItem from "../../components/Form/FormItem";
 import StatusItem from "../../components/Form/StatusItem";
+import List from "../../components/List/List";
 
 const Index = () =>  {	
 		// console.log(utilsStyles.body);
@@ -22,7 +23,8 @@ const Index = () =>  {
 			<h1 className={styles.box}>Welcome to Home Page</h1>
 			<AlertButton timeNow="12:00:02 PM"/>						
 			{/* <FormItem/> */}
-			<StatusItem/>
+			{/* <StatusItem/> */}
+			<List/>
 		</Fragment>
 	)	
 }
