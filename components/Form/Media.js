@@ -1,8 +1,13 @@
 import React from "react";
 
+const Active = (props) => {
+    return (
+        <p>VS Code</p>
+    )
+}
 const Media = (props) => {
     return (
-        <p>Media</p>
+        <Active/>
     )
 }
 
