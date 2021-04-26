@@ -1,52 +1,33 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useHttp from "../../hooks/use-http";
 
-let counter = 0;
-
+const obj = () => {
+    return {
+        getMethod: () => {}
+    }
+}
 const Students = props => {
-    counter += 1;
-    const [students, setStudents] = useState([]);
-    const [description, setDescription] = useState(null);
+    // const {isLoading, students, isLoaded, sendRequest } = useHttp({
+    //     resource: "students"
+    // });    
+    const {sendRequest} = useHttp();
+    const [desc, setDesc] = useState({});
+    const [name, setName] = useState({});
+    const [initialLoad, setInitialLoad] = useState(true);
 
-
-
-
-    useEffect(async () => {
-        console.log("useEffect []");
-        counter += 10;
-        // console.log("useEffect []");    
-        setDescription("loading...");
-
-        
-        // log += " (useEffect [])\n";
-        const response = await axios.get("/api/students");
-        console.log("response");  
-        setStudents(response.data);
-    }, [])
-
+    const changeButton = () => {
+        setDesc({});
+    }
     useEffect(() => {
-        counter += 10;
-        console.log("useEffect [students.length]");
-        // counter *= 3
-        // setCounter2("activated");
-        // console.log("useEffect []");    
-        // setDescription("captured");
-        // ++counter;
-        // log += " (useEffect [students.length])\n";
-    }, [students.length])
+        setDesc({});
+    }, [sendRequest]);
 
     return (
         <div>
-            <p>{students.length === 0 ? "no data" : "there is data"}</p>
-            {/* <p>{description}</p> */}
-            {/* {log.split("\n").map(str => {
-                return (
-                    <p>{str }</p>
-                )
-            })}             */}
-            {/* <p>{ counter }</p> */}
-            <p>{ counter }</p>
-        </div>)
+            <button onClick={changeButton}>Change desc</button>     
+            <p>{name.name}</p>
+        </div>
+    )
 }
 
 export default Students;
