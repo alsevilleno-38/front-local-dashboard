@@ -13,6 +13,7 @@ export default (req, res, next) => {
                     res.status(510).send(errorMsg);
                 }
                 else {
+                    console.log(data);
                     res.setHeader("content-type", "application/json");
                     res.status(230).send(data);
                 }

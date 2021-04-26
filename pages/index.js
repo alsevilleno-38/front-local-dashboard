@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import Head from 'next/head'
 import indexStyle from "./index.module.css";
 
-const Index = () => {	
+const IndexPage = () => {	
 	return (
 		<Fragment>
 			<Head>
@@ -13,4 +13,4 @@ const Index = () => {
 	)	
 }
 
-export default Index;
+export default IndexPage;

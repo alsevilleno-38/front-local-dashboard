@@ -6,7 +6,7 @@ import FormItem from "../../components/Form/FormItem";
 import StatusItem from "../../components/Form/StatusItem";
 import List from "../../components/List/List";
 
-const Index = () =>  {	
+const IndexPage = () =>  {	
 		// console.log(utilsStyles.body);
 	return (
 		<Fragment>								
@@ -29,4 +29,4 @@ const Index = () =>  {
 	)	
 }
 
-export default Index;
+export default IndexPage;
