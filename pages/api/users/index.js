@@ -1,23 +1,16 @@
 import path from "path";
 import fs from "fs";
+import connTypes from "../../../utils/conn-types";
+import { connectDb, client } from "../../../utils/connect-db";
 
-
-export default (req, res, next) => {    
-    if (req.method == "GET") {
-        fs.readFile(
-            path.join(process.env.PWD, "data", "users.json"),
-            "utf8",
-            (err, data) => {
-                if (err) {
-                    const errorMsg = `Something is wrong!\nDetails: ${err.message}`;
-                    res.status(510).send(errorMsg);
-                }
-                else {
-                    console.log(data);
-                    res.setHeader("content-type", "application/json");
-                    res.status(230).send(data);
-                }
-            }
-        );
-    }    
+export default async (req, res, next) => {
+    if (!client) {
+        client = await connectDb(connTypes.MONGO_DB);
+    }
+    else {
+        if (req.method == "GET") {
+            client.db("testing").collection("default").insertOne({ name: "default" });
+            res.status(250).send("done");
+        }    
+    }
 };
