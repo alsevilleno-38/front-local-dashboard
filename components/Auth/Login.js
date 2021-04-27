@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
+import styles from "./Auth.module.scss";
+import Input from "./Input";
+import Form from "./Form";
 
 const Login = props => {
-    useEffect(async () => {
-
-        const result = await client.db("testing").collections("default").insertOne({ name: "Dam" });
-        console.log(result);
-    }, [])
     return (
-        <>
-            <p>Success</p>
-        </>
+        <div className={styles["login-form"]}>
+            <Form>
+                <Input type="email"/>
+                <Input type="password"/>                
+                <Input type="submit"/>
+            </Form>
+        </div>
     )
 }
 

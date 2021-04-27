@@ -7,9 +7,9 @@ const authPage = (props) => {
     return (
         <>
             <Head>
-                <title>Authentication</title>
-                <Login/>
-            </Head>            
+                <title>Authentication</title>                
+            </Head>  
+            <Login/>          
         </>
     )
     

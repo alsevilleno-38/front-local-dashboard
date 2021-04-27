@@ -1,13 +1,14 @@
-import { getConnString } from "./get-config";
-import connTypes from "./conn-types";
 import mongoDb from "mongodb";
+import { getConnString } from "./get-config";
+import {MONGO_DB} from "./conn-types";
+
 export let client;
-export const connectDb = (conn_type) => {
+export const mongoConnect = () => {
     return new Promise(async (resolve, reject) => {
         let mongoClient = mongoDb.MongoClient;        
-        const connString = await getConnString(conn_type);
+        const connString = await getConnString(MONGO_DB);
         try {
-            const client = await mongoClient.connect(connString, { useUnifiedTopology: true, useNewUrlParser: true })
+            client = await mongoClient.connect(connString, { useUnifiedTopology: true, useNewUrlParser: true })
             resolve(client);
         }
         catch (err) {
@@ -17,7 +18,7 @@ export const connectDb = (conn_type) => {
     })
 
 }    
+
 export default {
-    connectDb,
-    client
+    mongoConnect
 };
