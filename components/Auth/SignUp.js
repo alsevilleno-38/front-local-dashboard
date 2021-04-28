@@ -57,16 +57,18 @@ const InitialLogin = props => {
         const newEmail = e.target.value;
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 
-        if (emailRegex.test(newEmail.toLowerCase()) && newEmail.length > 0) {
-            if (1) {
-                const result = await axios.get("/api/email/test");                
-                // setIsEmailValid(result.data.isValid);
-                
-                setIsEmailValid(true);
-            }
-            else {
-                setIsEmailValid(true);
-            }
+        if (emailRegex.test(newEmail.toLowerCase()) && newEmail.length > 0) {                     
+            // setIsEmailValid(result.data.isValid);                
+            // send request only after 200ms
+            axios.post("http://127.0.0.1:5500/test", {newEmail}).then(result => {
+                console.log(result.data.isExist);
+                if (result.data.isExist) {
+                    setIsEmailValid(false);
+                }
+                else {
+                    setIsEmailValid(true);
+                }
+            })
         }
         else {
             setIsEmailValid(false);

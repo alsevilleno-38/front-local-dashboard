@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Auth.module.scss";
+import axios from "axios";
 
 const fieldState = {};
 const InitialLogin = props => {
@@ -25,17 +26,22 @@ const InitialLogin = props => {
             setIsFormValid(false);
         }
     }
-    const emailChanged = e => {
+    const emailChanged = async e => {
+        const t0 = performance.now();
         setIsFormValid(null);
         const newEmail = e.target.value;
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;        
         if (emailRegex.test(newEmail.toLowerCase()) && newEmail.length > 0) {
             setIsEmailValid(true);
+            // const result = await axios.get("/api/email");
+            
         }
         else {
             setIsEmailValid(false);
         }        
-        setEmail(newEmail);
+        setEmail(newEmail);        
+        
+        
     }
     const passwordChanged = e => {
         setIsFormValid(null);
