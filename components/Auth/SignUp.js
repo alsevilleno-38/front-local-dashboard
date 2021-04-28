@@ -59,7 +59,7 @@ const InitialLogin = props => {
                 
         if (emailRegex.test(newEmail.toLowerCase()) && newEmail.length > 0) {
             if (1) {
-                // const result = await axios.post("/api/email/isvalid", { newEmail });                
+                const result = await axios.get("/api/email/test");                
                 // setIsEmailValid(result.data.isValid);
                 
                 setIsEmailValid(true);
