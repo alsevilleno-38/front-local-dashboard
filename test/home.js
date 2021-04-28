@@ -1,10 +1,3 @@
-const obj = {name: "mod"};
-function home() {
-    return obj;
-}
+const home = {name: "Pam"}
 
-const init = async () => {
-    await home();
-}
-init();
-console.log("10");
+export default home;
