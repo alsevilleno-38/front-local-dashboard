@@ -6,7 +6,7 @@ const IndexPage = props => {
     return (
         <>
             <Head>
-                <title>Login</title>                
+                <title>Sign Up</title>                
             </Head>  
             <SignUp/>            
         </>
