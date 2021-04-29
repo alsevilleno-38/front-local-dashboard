@@ -15,6 +15,15 @@
         outline: 0;
         border: 1px solid black;
     }
+    .checkbox {
+        display: flex;
+        flex-direction: row;
+        column-gap: 0.2rem;
+        align-items: center;
+        label {
+            font-size: 0.8rem;
+        }
+    }
     // .input-item {
     // }
     // .input-submit-item {

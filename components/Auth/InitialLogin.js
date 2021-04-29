@@ -13,14 +13,38 @@ const InitialLogin = props => {
     }
     const [email, setEmail] = useState("");   
     const [password, setPassword] = useState("");
+
     const [isEmailValid, setIsEmailValid] = useState(null);
     const [isPasswordValid, setIsPasswordValid] = useState(null);
     const [isFormValid, setIsFormValid] = useState(null);
-    const submitForm = e => {
+
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
+    const submitForm = async e => {
         e.preventDefault();
         if (isEmailValid && isPasswordValid) {
-            initialize();
-            alert("Form has been send");
+            setIsSubmitDisabled(true);
+            try {
+                const result = await axios.post("http://127.0.0.1:5500/login", {
+                    email,
+                    password
+                });
+                if (result.data.isExist) {
+                    initialize();                
+                    alert("You have logged in!");
+                }
+                else {
+                    alert("Wrong email or password");
+                }
+            }
+            catch (e) {                
+                console.log(e);
+                alert("Something is wrong! Can't Login");
+            }
+            finally {
+                setIsSubmitDisabled(false);
+            }
+            // alert("Form has been send");
         }
         else {
             setIsFormValid(false);
@@ -76,7 +100,7 @@ const InitialLogin = props => {
                 }
             </div>
             <div>
-                <input type="submit" value="Submit" style={{ cursor: "pointer" }} />
+                <input type="submit" value="Submit" style={{ cursor: "pointer" }} disabled={isSubmitDisabled}/>
                 {isFormValid == null || isFormValid == true ? null :
                     <p className={styles["invalid-text"]}>
                         Form cannot be submitted
